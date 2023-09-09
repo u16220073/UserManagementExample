@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="32407546919348fdb79b484f8f3ad320" Name="Diagram1">
+        <EntityTypeShape EntityType="Daspoort_ClinicModel.Consultation" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Daspoort_ClinicModel.Family_Member" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Daspoort_ClinicModel.FamilyRelationship" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Daspoort_ClinicModel.Patient" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Daspoort_ClinicModel.Province" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Daspoort_ClinicModel.Title" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <AssociationConnector Association="Daspoort_ClinicModel.FK__Consultat__Patie__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="Daspoort_ClinicModel.FK__Family_Me__Patie__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="Daspoort_ClinicModel.FK__Family_Me__Relat__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="Daspoort_ClinicModel.FK__Patient__Provinc__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="Daspoort_ClinicModel.FK__Patient__Title__182C9B23" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

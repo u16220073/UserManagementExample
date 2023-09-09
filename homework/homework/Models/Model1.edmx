@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Daspoort_ClinicModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Consultation">
+          <Key>
+            <PropertyRef Name="Consult_No" />
+          </Key>
+          <Property Name="Consult_No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Con_Weight" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_Height" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_BMI" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_UrineTest" Type="varchar" MaxLength="20" />
+          <Property Name="Con_Hist_Temperature" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_HeartRate" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_Waist" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_BloodPressure" Type="varchar" MaxLength="10" />
+          <Property Name="Con_Hist_BloodGlucose" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_Oedema" Type="varchar" MaxLength="20" />
+          <Property Name="Con_Hist_EpilepsyBloods" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Consult_Date" Type="varchar" MaxLength="30" />
+          <Property Name="Con_Note" Type="varchar" MaxLength="150" />
+          <Property Name="User_ID" Type="int" />
+          <Property Name="Patient_No" Type="int" />
+        </EntityType>
+        <EntityType Name="Family_Member">
+          <Key>
+            <PropertyRef Name="Member_ID" />
+            <PropertyRef Name="Patient_No" />
+          </Key>
+          <Property Name="Member_ID" Type="int" Nullable="false" />
+          <Property Name="Patient_No" Type="int" Nullable="false" />
+          <Property Name="Relationship" Type="int" />
+        </EntityType>
+        <EntityType Name="FamilyRelationship">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Patient_No" />
+          </Key>
+          <Property Name="Patient_No" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Title" Type="int" />
+          <Property Name="CitizenShip" Type="varchar" MaxLength="25" />
+          <Property Name="ID_Number" Type="varchar" MaxLength="13" />
+          <Property Name="Passport_No" Type="varchar" MaxLength="20" />
+          <Property Name="Patient_Address" Type="varchar" MaxLength="150" />
+          <Property Name="Province_ID" Type="int" />
+          <Property Name="TelePhone" Type="varchar" MaxLength="10" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="Date_Of_Birth" Type="varchar" MaxLength="20" />
+          <Property Name="ImageId" Type="int" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="Province_ID" />
+          </Key>
+          <Property Name="Province_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Province_Name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="Title_ID" />
+          </Key>
+          <Property Name="Title_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__Consultat__Patie__52593CB8">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_No" />
+            </Principal>
+            <Dependent Role="Consultation">
+              <PropertyRef Name="Patient_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Family_Me__Patie__286302EC">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Family_Member" Type="Self.Family_Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_No" />
+            </Principal>
+            <Dependent Role="Family_Member">
+              <PropertyRef Name="Patient_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Family_Me__Relat__29572725">
+          <End Role="FamilyRelationship" Type="Self.FamilyRelationship" Multiplicity="0..1" />
+          <End Role="Family_Member" Type="Self.Family_Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FamilyRelationship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Family_Member">
+              <PropertyRef Name="Relationship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patient__Provinc__1B0907CE">
+          <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Province_ID" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="Province_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patient__Title__182C9B23">
+          <End Role="Title" Type="Self.Title" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="Title_ID" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Daspoort_ClinicModelStoreContainer">
+          <EntitySet Name="Consultation" EntityType="Self.Consultation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Family_Member" EntityType="Self.Family_Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FamilyRelationship" EntityType="Self.FamilyRelationship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Consultat__Patie__52593CB8" Association="Self.FK__Consultat__Patie__52593CB8">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Consultation" EntitySet="Consultation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Family_Me__Patie__286302EC" Association="Self.FK__Family_Me__Patie__286302EC">
+            <End Role="Patient" EntitySet="Patient" />
+            <End Role="Family_Member" EntitySet="Family_Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Family_Me__Relat__29572725" Association="Self.FK__Family_Me__Relat__29572725">
+            <End Role="FamilyRelationship" EntitySet="FamilyRelationship" />
+            <End Role="Family_Member" EntitySet="Family_Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patient__Provinc__1B0907CE" Association="Self.FK__Patient__Provinc__1B0907CE">
+            <End Role="Province" EntitySet="Province" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patient__Title__182C9B23" Association="Self.FK__Patient__Title__182C9B23">
+            <End Role="Title" EntitySet="Title" />
+            <End Role="Patient" EntitySet="Patient" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Daspoort_ClinicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Consultation">
+          <Key>
+            <PropertyRef Name="Consult_No" />
+          </Key>
+          <Property Name="Consult_No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Con_Weight" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_Height" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_BMI" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_UrineTest" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Con_Hist_Temperature" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_HeartRate" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_Waist" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_BloodPressure" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Con_Hist_BloodGlucose" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Hist_Oedema" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Con_Hist_EpilepsyBloods" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="Con_Consult_Date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Con_Note" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="User_ID" Type="Int32" />
+          <Property Name="Patient_No" Type="Int32" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK__Consultat__Patie__52593CB8" FromRole="Consultation" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Family_Member">
+          <Key>
+            <PropertyRef Name="Member_ID" />
+            <PropertyRef Name="Patient_No" />
+          </Key>
+          <Property Name="Member_ID" Type="Int32" Nullable="false" />
+          <Property Name="Patient_No" Type="Int32" Nullable="false" />
+          <Property Name="Relationship" Type="Int32" />
+          <NavigationProperty Name="Patient" Relationship="Self.FK__Family_Me__Patie__286302EC" FromRole="Family_Member" ToRole="Patient" />
+          <NavigationProperty Name="FamilyRelationship" Relationship="Self.FK__Family_Me__Relat__29572725" FromRole="Family_Member" ToRole="FamilyRelationship" />
+        </EntityType>
+        <EntityType Name="FamilyRelationship">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Family_Member" Relationship="Self.FK__Family_Me__Relat__29572725" FromRole="FamilyRelationship" ToRole="Family_Member" />
+        </EntityType>
+        <EntityType Name="Patient">
+          <Key>
+            <PropertyRef Name="Patient_No" />
+          </Key>
+          <Property Name="Patient_No" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Title" Type="Int32" />
+          <Property Name="CitizenShip" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Number" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="Passport_No" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Patient_Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Province_ID" Type="Int32" />
+          <Property Name="TelePhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Of_Birth" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ImageId" Type="Int32" />
+          <NavigationProperty Name="Consultations" Relationship="Self.FK__Consultat__Patie__52593CB8" FromRole="Patient" ToRole="Consultation" />
+          <NavigationProperty Name="Family_Member" Relationship="Self.FK__Family_Me__Patie__286302EC" FromRole="Patient" ToRole="Family_Member" />
+          <NavigationProperty Name="Province" Relationship="Self.FK__Patient__Provinc__1B0907CE" FromRole="Patient" ToRole="Province" />
+          <NavigationProperty Name="Title1" Relationship="Self.FK__Patient__Title__182C9B23" FromRole="Patient" ToRole="Title" />
+        </EntityType>
+        <EntityType Name="Province">
+          <Key>
+            <PropertyRef Name="Province_ID" />
+          </Key>
+          <Property Name="Province_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Province_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__Patient__Provinc__1B0907CE" FromRole="Province" ToRole="Patient" />
+        </EntityType>
+        <EntityType Name="Title">
+          <Key>
+            <PropertyRef Name="Title_ID" />
+          </Key>
+          <Property Name="Title_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patients" Relationship="Self.FK__Patient__Title__182C9B23" FromRole="Title" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK__Consultat__Patie__52593CB8">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
+          <End Role="Consultation" Type="Self.Consultation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_No" />
+            </Principal>
+            <Dependent Role="Consultation">
+              <PropertyRef Name="Patient_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Family_Me__Patie__286302EC">
+          <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+          <End Role="Family_Member" Type="Self.Family_Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="Patient_No" />
+            </Principal>
+            <Dependent Role="Family_Member">
+              <PropertyRef Name="Patient_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Family_Me__Relat__29572725">
+          <End Role="FamilyRelationship" Type="Self.FamilyRelationship" Multiplicity="0..1" />
+          <End Role="Family_Member" Type="Self.Family_Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FamilyRelationship">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Family_Member">
+              <PropertyRef Name="Relationship" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patient__Provinc__1B0907CE">
+          <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Province">
+              <PropertyRef Name="Province_ID" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="Province_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Patient__Title__182C9B23">
+          <End Role="Title" Type="Self.Title" Multiplicity="0..1" />
+          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Title">
+              <PropertyRef Name="Title_ID" />
+            </Principal>
+            <Dependent Role="Patient">
+              <PropertyRef Name="Title" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Daspoort_ClinicEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Consultations" EntityType="Self.Consultation" />
+          <EntitySet Name="Family_Member" EntityType="Self.Family_Member" />
+          <EntitySet Name="FamilyRelationships" EntityType="Self.FamilyRelationship" />
+          <EntitySet Name="Patients" EntityType="Self.Patient" />
+          <EntitySet Name="Provinces" EntityType="Self.Province" />
+          <EntitySet Name="Titles" EntityType="Self.Title" />
+          <AssociationSet Name="FK__Consultat__Patie__52593CB8" Association="Self.FK__Consultat__Patie__52593CB8">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Consultation" EntitySet="Consultations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Family_Me__Patie__286302EC" Association="Self.FK__Family_Me__Patie__286302EC">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="Family_Member" EntitySet="Family_Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Family_Me__Relat__29572725" Association="Self.FK__Family_Me__Relat__29572725">
+            <End Role="FamilyRelationship" EntitySet="FamilyRelationships" />
+            <End Role="Family_Member" EntitySet="Family_Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patient__Provinc__1B0907CE" Association="Self.FK__Patient__Provinc__1B0907CE">
+            <End Role="Province" EntitySet="Provinces" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Patient__Title__182C9B23" Association="Self.FK__Patient__Title__182C9B23">
+            <End Role="Title" EntitySet="Titles" />
+            <End Role="Patient" EntitySet="Patients" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Daspoort_ClinicModelStoreContainer" CdmEntityContainer="Daspoort_ClinicEntities2">
+          <EntitySetMapping Name="Consultations">
+            <EntityTypeMapping TypeName="Daspoort_ClinicModel.Consultation">
+              <MappingFragment StoreEntitySet="Consultation">
+                <ScalarProperty Name="Consult_No" ColumnName="Consult_No" />
+                <ScalarProperty Name="Con_Weight" ColumnName="Con_Weight" />
+                <ScalarProperty Name="Con_Hist_Height" ColumnName="Con_Hist_Height" />
+                <ScalarProperty Name="Con_Hist_BMI" ColumnName="Con_Hist_BMI" />
+                <ScalarProperty Name="Con_Hist_UrineTest" ColumnName="Con_Hist_UrineTest" />
+                <ScalarProperty Name="Con_Hist_Temperature" ColumnName="Con_Hist_Temperature" />
+                <ScalarProperty Name="Con_Hist_HeartRate" ColumnName="Con_Hist_HeartRate" />
+                <ScalarProperty Name="Con_Hist_Waist" ColumnName="Con_Hist_Waist" />
+                <ScalarProperty Name="Con_Hist_BloodPressure" ColumnName="Con_Hist_BloodPressure" />
+                <ScalarProperty Name="Con_Hist_BloodGlucose" ColumnName="Con_Hist_BloodGlucose" />
+                <ScalarProperty Name="Con_Hist_Oedema" ColumnName="Con_Hist_Oedema" />
+                <ScalarProperty Name="Con_Hist_EpilepsyBloods" ColumnName="Con_Hist_EpilepsyBloods" />
+                <ScalarProperty Name="Con_Consult_Date" ColumnName="Con_Consult_Date" />
+                <ScalarProperty Name="Con_Note" ColumnName="Con_Note" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Family_Member">
+            <EntityTypeMapping TypeName="Daspoort_ClinicModel.Family_Member">
+              <MappingFragment StoreEntitySet="Family_Member">
+                <ScalarProperty Name="Member_ID" ColumnName="Member_ID" />
+                <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+                <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FamilyRelationships">
+            <EntityTypeMapping TypeName="Daspoort_ClinicModel.FamilyRelationship">
+              <MappingFragment StoreEntitySet="FamilyRelationship">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patients">
+            <EntityTypeMapping TypeName="Daspoort_ClinicModel.Patient">
+              <MappingFragment StoreEntitySet="Patient">
+                <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CitizenShip" ColumnName="CitizenShip" />
+                <ScalarProperty Name="ID_Number" ColumnName="ID_Number" />
+                <ScalarProperty Name="Passport_No" ColumnName="Passport_No" />
+                <ScalarProperty Name="Patient_Address" ColumnName="Patient_Address" />
+                <ScalarProperty Name="Province_ID" ColumnName="Province_ID" />
+                <ScalarProperty Name="TelePhone" ColumnName="TelePhone" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Date_Of_Birth" ColumnName="Date_Of_Birth" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Provinces">
+            <EntityTypeMapping TypeName="Daspoort_ClinicModel.Province">
+              <MappingFragment StoreEntitySet="Province">
+                <ScalarProperty Name="Province_ID" ColumnName="Province_ID" />
+                <ScalarProperty Name="Province_Name" ColumnName="Province_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Titles">
+            <EntityTypeMapping TypeName="Daspoort_ClinicModel.Title">
+              <MappingFragment StoreEntitySet="Title">
+                <ScalarProperty Name="Title_ID" ColumnName="Title_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

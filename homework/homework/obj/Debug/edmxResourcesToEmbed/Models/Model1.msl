@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Daspoort_ClinicModelStoreContainer" CdmEntityContainer="Daspoort_ClinicEntities2">
+    <EntitySetMapping Name="Consultations">
+      <EntityTypeMapping TypeName="Daspoort_ClinicModel.Consultation">
+        <MappingFragment StoreEntitySet="Consultation">
+          <ScalarProperty Name="Consult_No" ColumnName="Consult_No" />
+          <ScalarProperty Name="Con_Weight" ColumnName="Con_Weight" />
+          <ScalarProperty Name="Con_Hist_Height" ColumnName="Con_Hist_Height" />
+          <ScalarProperty Name="Con_Hist_BMI" ColumnName="Con_Hist_BMI" />
+          <ScalarProperty Name="Con_Hist_UrineTest" ColumnName="Con_Hist_UrineTest" />
+          <ScalarProperty Name="Con_Hist_Temperature" ColumnName="Con_Hist_Temperature" />
+          <ScalarProperty Name="Con_Hist_HeartRate" ColumnName="Con_Hist_HeartRate" />
+          <ScalarProperty Name="Con_Hist_Waist" ColumnName="Con_Hist_Waist" />
+          <ScalarProperty Name="Con_Hist_BloodPressure" ColumnName="Con_Hist_BloodPressure" />
+          <ScalarProperty Name="Con_Hist_BloodGlucose" ColumnName="Con_Hist_BloodGlucose" />
+          <ScalarProperty Name="Con_Hist_Oedema" ColumnName="Con_Hist_Oedema" />
+          <ScalarProperty Name="Con_Hist_EpilepsyBloods" ColumnName="Con_Hist_EpilepsyBloods" />
+          <ScalarProperty Name="Con_Consult_Date" ColumnName="Con_Consult_Date" />
+          <ScalarProperty Name="Con_Note" ColumnName="Con_Note" />
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Family_Member">
+      <EntityTypeMapping TypeName="Daspoort_ClinicModel.Family_Member">
+        <MappingFragment StoreEntitySet="Family_Member">
+          <ScalarProperty Name="Member_ID" ColumnName="Member_ID" />
+          <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FamilyRelationships">
+      <EntityTypeMapping TypeName="Daspoort_ClinicModel.FamilyRelationship">
+        <MappingFragment StoreEntitySet="FamilyRelationship">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="Daspoort_ClinicModel.Patient">
+        <MappingFragment StoreEntitySet="Patient">
+          <ScalarProperty Name="Patient_No" ColumnName="Patient_No" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CitizenShip" ColumnName="CitizenShip" />
+          <ScalarProperty Name="ID_Number" ColumnName="ID_Number" />
+          <ScalarProperty Name="Passport_No" ColumnName="Passport_No" />
+          <ScalarProperty Name="Patient_Address" ColumnName="Patient_Address" />
+          <ScalarProperty Name="Province_ID" ColumnName="Province_ID" />
+          <ScalarProperty Name="TelePhone" ColumnName="TelePhone" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Date_Of_Birth" ColumnName="Date_Of_Birth" />
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Provinces">
+      <EntityTypeMapping TypeName="Daspoort_ClinicModel.Province">
+        <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="Province_ID" ColumnName="Province_ID" />
+          <ScalarProperty Name="Province_Name" ColumnName="Province_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Titles">
+      <EntityTypeMapping TypeName="Daspoort_ClinicModel.Title">
+        <MappingFragment StoreEntitySet="Title">
+          <ScalarProperty Name="Title_ID" ColumnName="Title_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
